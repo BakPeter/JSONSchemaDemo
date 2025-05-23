@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("JsonSchemaGenerator")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ded4a61609dc1330d5ebf204b0584b0be5b29670")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+befe515fd6b56d54a3df72d59d17ecf1ca370a66")]
 [assembly: System.Reflection.AssemblyProductAttribute("JsonSchemaGenerator")]
 [assembly: System.Reflection.AssemblyTitleAttribute("JsonSchemaGenerator")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
