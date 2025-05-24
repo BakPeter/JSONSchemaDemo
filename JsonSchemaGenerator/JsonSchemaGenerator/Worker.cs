@@ -1,23 +1,22 @@
+using JsonSchemaGenerator.Core.Interfaces;
+
 namespace JsonSchemaGenerator;
 
 public class Worker : BackgroundService
 {
     private readonly ILogger<Worker> _logger;
+    private readonly ISchemaGenerator _schemaGenerator;
 
-    public Worker(ILogger<Worker> logger)
+    public Worker(ILogger<Worker> logger, ISchemaGenerator schemaGenerator)
     {
         _logger = logger;
+        _schemaGenerator = schemaGenerator;
     }
 
-    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    protected override Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        while (!stoppingToken.IsCancellationRequested)
-        {
-            if (_logger.IsEnabled(LogLevel.Information))
-            {
-                _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-            }
-            await Task.Delay(1000, stoppingToken);
-        }
+        var obj = new Dictionary<string, object>();
+        var schema = _schemaGenerator.Generate(obj);
+        return Task.CompletedTask;
     }
 }

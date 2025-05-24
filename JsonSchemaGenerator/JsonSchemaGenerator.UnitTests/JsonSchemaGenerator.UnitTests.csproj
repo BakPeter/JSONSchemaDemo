@@ -18,6 +18,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\JsonSchemaGenerator.Core\JsonSchemaGenerator.Core.csproj" />
+    <ProjectReference Include="..\JsonSchemaGenerator.Infrastructure\JsonSchemaGenerator.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="NUnit.Framework" />
   </ItemGroup>
 
