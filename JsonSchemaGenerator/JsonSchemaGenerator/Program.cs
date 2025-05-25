@@ -2,11 +2,15 @@ using JsonSchemaGenerator;
 using JsonSchemaGenerator.Core.Configurations;
 using JsonSchemaGenerator.Infrastructure;
 
-var builder = Host.CreateApplicationBuilder(args);
-builder.Services.AddHostedService<Worker>();
 
-var settings = builder.Configuration.GetSection("JSGeneratorSettings").Get<JSGeneratorSettings>();
-builder.Services.AddJsonSchemaGeneratorServices(settings!);
+IHost host = Host.CreateDefaultBuilder(args)
+    .ConfigureServices((context, services )=>
+    {
+        var settings = context.Configuration.GetSection("JSGeneratorSettings").Get<JSGeneratorSettings>();
+        services.AddJsonSchemaGeneratorServices(settings!);
 
-var host = builder.Build();
-host.Run();
+        services.AddHostedService<Worker>();
+    })
+    .Build();
+
+await host.RunAsync();
