@@ -2,6 +2,6 @@
 
 public interface ISchemaGenerator
 {
-    string GenerateAndWrite(object? obj);
-    Dictionary<string, object> GenerateSchema(object? obj);
+    (string, string) GenerateAndWrite(object? obj);
+    Dictionary<string, object> Generate(object? obj);
 }

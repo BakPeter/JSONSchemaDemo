@@ -10,12 +10,22 @@ namespace JsonSchemaGenerator.UnitTests;
 [TestFixture]
 public class SchemaGeneratorTests
 {
-    private ISchemaGenerator _generator = new SchemaGenerator(new JSGeneratorSettings
-        { SchemaUrl = "http://json-schema.org/draft-04/schema#" });
+    private ISchemaGenerator _generator;
+    private readonly List<ValidTestCase> _validTestCases;
+
+    public SchemaGeneratorTests()
+    {
+        _validTestCases = new List<ValidTestCase>();
+        _validTestCases.Add(new ValidTestCase
+            { Description = "Schema for null object", Obj = null, JsonSchema = "{\"type\":\"null\"}" });
+        //_validTestCases.Add(new ValidTestCase
+        //    { Description = "Schema for null object", Obj = null, JsonSchema = "{ \"type\":\"string\"}" });
+    }
 
     [SetUp]
     public void Setup()
     {
+        _generator = new SchemaGenerator(new JSGeneratorSettings());
     }
 
     [TearDown]
@@ -25,68 +35,43 @@ public class SchemaGeneratorTests
 
 
     [Test]
-    public void Generate_InputCarInstance_ReturnsCarSchema()
+    public void Generate_InputObjectInstance_ReturnsObjectJsonSchema()
     {
-        // Arrange
-        var carInstance = new Car { Make = "Ford", Model = "Focus", Year = 2020 };
-        var expectedCarSchemaJson =
-            "{\"type\":\"object\",\"required\":[\"Make\",\"Model\",\"Year\"],\"properties\":{\"Make\":{\"type\":\"string\"},\"Model\":{\"type\":\"string\"},\"Year\":{\"type\":\"integer\",\"format\":\"int32\"},\"Color\":{\"type\":[\"string\",\"null\"]},\"CarEngine\":{\"type\":[\"object\",\"null\"],\"properties\":{\"Type\":{\"type\":\"string\"},\"Horsepower\":{\"type\":\"integer\",\"format\":\"int32\"},\"required\":[\"Type\",\"Horsepower\"]}}}}";
+        var failedTests = new List<string>();
+        var passedTestsCounter = 0;
+        for (var i = 0; i < _validTestCases.Count; i++)
+        {
+            // Arrange
+            var testCase = _validTestCases[i];
+            var instance = testCase.Obj;
+            var expectedSchema = testCase.JsonSchema;
 
-        // Act
-        // var actualSchema = _generator.Generate(carInstance);
-        var actualSchema = _generator.GenerateSchema(carInstance);
-        var schema = JsonSerializer.Serialize(actualSchema, new JsonSerializerOptions { WriteIndented = true });
+            // Act
+            var schema = _generator.Generate(instance);
+            var actualSchema = JsonSerializer.Serialize(schema);
+
+            // Assert - Aggregate Failures
+            if (actualSchema.Equals(expectedSchema))
+                passedTestsCounter++;
+            else
+                failedTests.Add($"{i}: {testCase.Description}, expected: '{expectedSchema}', actual: '{actualSchema}'");
+        }
 
         // Assert
-        // Assert.That(expectedCarSchemaJson, Is.EqualTo(actualSchema));
-        Assert.Pass();
+        if (failedTests.Count == 0)
+            Assert.Pass($"{passedTestsCounter}/{_validTestCases.Count} Tests Passed");
+        else
+        {
+            var result =
+                $"{passedTestsCounter}/{_validTestCases.Count} Tests Passed\nFailedTests:\n{string.Join("\n", failedTests)}";
+            Assert.Fail(result);
+        }
     }
 }
 
-public class Car
+internal class ValidTestCase
 {
-    public string Make { get; set; } = null!;
-    public string Model { get; set; } = null!;
-    public int? Year { get; set; }
-    public CarColor Color { get; set; }
-    public CarType? CarType{ get; set; }
-    public Engine? CarEngine { get; set; }
-}
-
-public enum CarColor
-{
-    White,
-    Black,
-    Red,
-    Green
-}
-
-public enum CarType
-{
-    Sports,
-    Suv,
-    Family,
-
-}
-public class Engine
-{
-    public string? Type { get; set; } = null!;
-    public int Horsepower { get; set; }
-}
-
-public class Person
-{
-    public int Id { get; set; } // Non-nullable, should be required
-    public string Name { get; set; } // Nullable (string), not required
-    public DateTime CreatedDate { get; set; } // Non-nullable, should be required
-    public decimal? Price { get; set; } // Nullable (decimal?), not required
-    public List<string> Tags { get; set; } // Nullable (list), not required
-    public Address? ShippingAddress { get; set; } // Nullable (complex type), not required
-}
-
-public class Address
-{
-    public string Street { get; set; }
-    public string City { get; set; }
-    public string ZipCode { get; set; }
+    public string Description { get; set; }
+    public object? Obj { get; set; }
+    public string JsonSchema { get; set; }
 }
