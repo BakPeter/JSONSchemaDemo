@@ -27,7 +27,7 @@ The instance is the JSON document that is being validated or described, and the 
     - [Schemas](#schemas)
     - [Schema object keys](#schema-object-keys)
     - [Nested data structure](#nested-data-structure)
-    - [Add external reference](#add-external-reference)
+    - [Add reference](#add-reference)
 
 - [Validate JSON data against the schema](#validate-json-data-against-the-schema)
 
@@ -105,7 +105,17 @@ The instance is the JSON document that is being validated or described, and the 
     "warehouseLocation": {
       "latitude": -78.75,
       "longitude": 20.4
-    }
+    },
+    "vegetables": [
+      {
+        "veggieName": "potato",
+        "veggieLike": true
+      },
+      {
+        "veggieName": "broccoli",
+        "veggieLike": false
+      }
+    ]
   }
   ```
 
@@ -160,12 +170,32 @@ The instance is the JSON document that is being validated or described, and the 
         },
         "required": [ "length", "width", "height" ]
       },
+      "vegetables": {
+        "type": "array",
+        "items": { "$ref": "#/$defs/veggie" }
+      },
       "warehouseLocation": {
         "description": "Coordinates of the warehouse where the product is located.",
         "$ref": "https://example.com/geographical-location.schema.json"
       }
     },
-    "required": [ "productId", "productName", "price" ]
+    "required": [ "productId", "productName", "price" ],
+    "$defs": {
+      "veggie": {
+        "type": "object",
+        "required": [ "veggieName", "veggieLike" ],
+        "properties": {
+          "veggieName": {
+            "type": "string",
+            "description": "The name of the vegetable."
+          },
+          "veggieLike": {
+            "type": "boolean",
+            "description": "Do I like this vegetable?"
+          }
+        }
+      }
+    }
   }
   ```
 
@@ -303,13 +333,15 @@ The instance is the JSON document that is being validated or described, and the 
   }
   ```
 
-- ### Add external reference
+- ### Add reference
 
   **[`^ top ^`](#jsonschemademo)** | **[`^ Table of content ^`](#table-of-content)**
 
   add property key
 
-  link external schema by setting **$ref**, a **schema keayword**, value
+  link external schema by setting **$ref**, a **schema keayword**, value to link
+
+  link internal schema by setting **$ref**, a **schema keayword**, value to "#/**$defs**/schemaName"
 
   add property key of **object** type, and all of it's defenition
 
@@ -318,11 +350,30 @@ The instance is the JSON document that is being validated or described, and the 
     ...
     "properties": {
       ...
+      "vegetables": {
+        "type": "array",
+        "items": { "$ref": "#/$defs/veggie" }
+      },
       "warehouseLocation": {
         "description": "Coordinates of the warehouse where the product is located.",
         "$ref": "https://example.com/geographical-location.schema.json"
       }
-    }
+    },
+    "$defs": {
+    "veggie": {
+      "type": "object",
+      "required": [ "veggieName", "veggieLike" ],
+      "properties": {
+        "veggieName": {
+          "type": "string",
+          "description": "The name of the vegetable."
+        },
+        "veggieLike": {
+          "type": "boolean",
+          "description": "Do I like this vegetable?"
+        }
+      }
+    },
   }
   ```
 

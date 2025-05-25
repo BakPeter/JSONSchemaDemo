@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>A First App</title>
+  </head>
+  <body>
+    <div id="app">
+      <div id="data">
+        <label>Json Data:</label>
+        <pre>{{ getJsonData() }}</pre>
+      </div>
+      <br />
+      <hr color="black" />
+      <br />
+      <div id="jsonsschema">
+        <label>Json Schema:</label>
+        <pre>{{ getJsonSchema() }}</pre>
+      </div>
+      <br />
+      <hr color="black" />
+      <br />
+      <div id="data-card">
+        <label>Data Card:</label>
+      </div>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
