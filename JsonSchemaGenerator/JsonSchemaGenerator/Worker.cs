@@ -16,7 +16,7 @@ public class Worker : BackgroundService
     protected override Task ExecuteAsync(CancellationToken stoppingToken)
     {
         var obj = new Dictionary<string, object>();
-        var schema = _schemaGenerator.Generate(obj);
+        var schema = _schemaGenerator.GenerateSchema(obj);
         return Task.CompletedTask;
     }
 }

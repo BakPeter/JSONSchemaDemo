@@ -10,24 +10,23 @@
         "projectUniqueName": "C:\\Workspaces\\JSONSchemaDemo\\JsonSchemaGenerator\\JsonSchemaGenerator.Core\\JsonSchemaGenerator.Core.csproj",
         "projectName": "JsonSchemaGenerator.Core",
         "projectPath": "C:\\Workspaces\\JSONSchemaDemo\\JsonSchemaGenerator\\JsonSchemaGenerator.Core\\JsonSchemaGenerator.Core.csproj",
-        "packagesPath": "C:\\Users\\bakpe\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\peterb\\.nuget\\packages\\",
         "outputPath": "C:\\Workspaces\\JSONSchemaDemo\\JsonSchemaGenerator\\JsonSchemaGenerator.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\bakpe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\peterb\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net8.0"
+          "net7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net8.0": {
-            "targetAlias": "net8.0",
+          "net7.0": {
+            "targetAlias": "net7.0",
             "projectReferences": {}
           }
         },
@@ -35,16 +34,11 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
-        "net8.0": {
-          "targetAlias": "net8.0",
+        "net7.0": {
+          "targetAlias": "net7.0",
           "imports": [
             "net461",
             "net462",
@@ -61,7 +55,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -71,24 +65,23 @@
         "projectUniqueName": "C:\\Workspaces\\JSONSchemaDemo\\JsonSchemaGenerator\\JsonSchemaGenerator.Infrastructure\\JsonSchemaGenerator.Infrastructure.csproj",
         "projectName": "JsonSchemaGenerator.Infrastructure",
         "projectPath": "C:\\Workspaces\\JSONSchemaDemo\\JsonSchemaGenerator\\JsonSchemaGenerator.Infrastructure\\JsonSchemaGenerator.Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\bakpe\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\peterb\\.nuget\\packages\\",
         "outputPath": "C:\\Workspaces\\JSONSchemaDemo\\JsonSchemaGenerator\\JsonSchemaGenerator.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\bakpe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\peterb\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net8.0"
+          "net7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net8.0": {
-            "targetAlias": "net8.0",
+          "net7.0": {
+            "targetAlias": "net7.0",
             "projectReferences": {
               "C:\\Workspaces\\JSONSchemaDemo\\JsonSchemaGenerator\\JsonSchemaGenerator.Core\\JsonSchemaGenerator.Core.csproj": {
                 "projectPath": "C:\\Workspaces\\JSONSchemaDemo\\JsonSchemaGenerator\\JsonSchemaGenerator.Core\\JsonSchemaGenerator.Core.csproj"
@@ -100,20 +93,15 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
-        "net8.0": {
-          "targetAlias": "net8.0",
+        "net7.0": {
+          "targetAlias": "net7.0",
           "dependencies": {
             "Microsoft.Extensions.DependencyInjection.Abstractions": {
               "target": "Package",
-              "version": "[8.0.0, )"
+              "version": "[7.0.0, )"
             }
           },
           "imports": [
@@ -132,7 +120,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -142,24 +130,23 @@
         "projectUniqueName": "C:\\Workspaces\\JSONSchemaDemo\\JsonSchemaGenerator\\JsonSchemaGenerator\\JsonSchemaGenerator.csproj",
         "projectName": "JsonSchemaGenerator",
         "projectPath": "C:\\Workspaces\\JSONSchemaDemo\\JsonSchemaGenerator\\JsonSchemaGenerator\\JsonSchemaGenerator.csproj",
-        "packagesPath": "C:\\Users\\bakpe\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\peterb\\.nuget\\packages\\",
         "outputPath": "C:\\Workspaces\\JSONSchemaDemo\\JsonSchemaGenerator\\JsonSchemaGenerator\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\bakpe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\peterb\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net8.0"
+          "net7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net8.0": {
-            "targetAlias": "net8.0",
+          "net7.0": {
+            "targetAlias": "net7.0",
             "projectReferences": {
               "C:\\Workspaces\\JSONSchemaDemo\\JsonSchemaGenerator\\JsonSchemaGenerator.Infrastructure\\JsonSchemaGenerator.Infrastructure.csproj": {
                 "projectPath": "C:\\Workspaces\\JSONSchemaDemo\\JsonSchemaGenerator\\JsonSchemaGenerator.Infrastructure\\JsonSchemaGenerator.Infrastructure.csproj"
@@ -171,20 +158,15 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
-        "net8.0": {
-          "targetAlias": "net8.0",
+        "net7.0": {
+          "targetAlias": "net7.0",
           "dependencies": {
             "Microsoft.Extensions.Hosting": {
               "target": "Package",
-              "version": "[8.0.0, )"
+              "version": "[7.0.0, )"
             }
           },
           "imports": [
@@ -203,7 +185,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

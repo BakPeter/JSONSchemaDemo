@@ -5,9 +5,14 @@ using System.Runtime.CompilerServices;
 
 namespace JsonSchemaGenerator.Infrastructure.Services;
 
-public class SchemaGenerator(JSGeneratorSettings settings) : ISchemaGenerator
+public class SchemaGenerator: ISchemaGenerator
 {
-    private readonly JSGeneratorSettings _settings = settings;
+    private readonly JSGeneratorSettings _settings;
+
+    public SchemaGenerator(JSGeneratorSettings settings)
+    {
+        _settings = settings;
+    }
 
     public string GenerateAndWrite(object? obj)
     {
@@ -94,35 +99,51 @@ public class SchemaGenerator(JSGeneratorSettings settings) : ISchemaGenerator
         return "string"; // fallback
     }
 
-    static bool IsRequired(PropertyInfo prop)
+    private bool IsRequired(PropertyInfo prop)
     {
         var type = prop.PropertyType;
 
-        // Nullable value type
+        // Value types
         if (Nullable.GetUnderlyingType(type) != null)
-            return false;
+            return false; // nullable value type (e.g., int?)
 
-        // Check nullable reference type via NullableAttribute
-        if (!type.IsValueType)
+        if (type.IsValueType)
+            return true; // non-nullable value type (e.g., int)
+
+        // Reference types: check if marked nullable (e.g., string?)
+        var nullable = prop.CustomAttributes
+            .FirstOrDefault(a => a.AttributeType.FullName == "System.Runtime.CompilerServices.NullableAttribute");
+
+        if (nullable != null)
         {
-            // Look for [Nullable] or [NullableContext] attributes
-            var nullableAttr = prop.GetCustomAttribute<NullableAttribute>();
-            if (nullableAttr != null && nullableAttr.NullableFlags.Length > 0)
+            if (nullable.ConstructorArguments.Count == 1)
             {
-                return nullableAttr.NullableFlags[0] == 1; // 1 = NOT nullable, 2 = nullable
-            }
+                var arg = nullable.ConstructorArguments[0];
+                if (arg.ArgumentType == typeof(byte))
+                {
+                    return (byte)arg.Value == 1; // 1 = not nullable, 2 = nullable
+                }
 
-            var contextAttr = prop.DeclaringType?.GetCustomAttribute<NullableContextAttribute>();
-            if (contextAttr != null)
-            {
-                return contextAttr.Flag == 1; // 1 = not nullable
+                if (arg.ArgumentType == typeof(byte[]) && arg.Value is IReadOnlyCollection<CustomAttributeTypedArgument> values)
+                {
+                    var flag = (byte)values.First().Value!;
+                    return flag == 1;
+                }
             }
-
-            // Default to required if no metadata
-            return true;
         }
 
-        // Value types (non-nullable)
+        // Fall back to NullableContextAttribute on declaring type
+        var nullableContext = prop.DeclaringType?
+            .CustomAttributes
+            .FirstOrDefault(a => a.AttributeType.FullName == "System.Runtime.CompilerServices.NullableContextAttribute");
+
+        if (nullableContext != null && nullableContext.ConstructorArguments.Count == 1)
+        {
+            var contextFlag = (byte)nullableContext.ConstructorArguments[0].Value!;
+            return contextFlag == 1; // 1 = not nullable, 2 = nullable
+        }
+
+        // Assume required if no nullable info found
         return true;
     }
 }
